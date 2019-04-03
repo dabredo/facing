@@ -3,6 +3,13 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <video id="video" width="640" height="480" autoplay></video>
+
     <script type="text/javascript">
         var video = document.querySelector("#video");
 
@@ -11,16 +18,10 @@
             .then(function (stream) {
                 video.srcObject = stream;
             })
-            .catch(function (err0r) {
+            .catch(function (error) {
                 console.log("Something went wrong!");
             });
         }
     </script>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-
-    <video id="video" width="640" height="480" autoplay></video>
   </body>
 </html>
