@@ -26,12 +26,24 @@
         // }
 
         async function run() {
+            console.log('run')
+
             await faceapi.loadFaceLandmarkModel('/')
 
             const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
             video.srcObject = stream
+
+            // const options = getFaceDetectorOptions()
+            // console.log('options', options)
+
+            // const result = await faceapi.detectSingleFace(video, options).withFaceExpressions()
+            const result = await faceapi.detectSingleFace(video).withFaceExpressions()
+            if (result) {
+                console.log(result)
+            }
         }
 
+            // const options = getFaceDetectorOptions()
         run();
     </script>
   </body>
