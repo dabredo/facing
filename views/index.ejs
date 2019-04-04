@@ -9,7 +9,7 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-    <video id="video" onloadedmetadata="onPlay(this)" width="640" height="480" autoplay></video>
+    <video id="video" width="640" height="480" autoplay></video>
 
     <script type="text/javascript">
 
@@ -24,10 +24,8 @@
         //     });
         // }
 
-        async function onPlay() {
+        async function onPlay(video) {
             console.log('onPlay');
-
-            const video = document.querySelector("#video");
 
             const result = await faceapi.detectSingleFace(video).withFaceExpressions()
             if (result) {
@@ -40,6 +38,8 @@
         async function run() {
             console.log('run')
 
+            const video = document.querySelector("#video");
+
             await faceapi.loadFaceLandmarkModel('/')
 
             const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
@@ -49,6 +49,8 @@
             // console.log('options', options)
 
             // const result = await faceapi.detectSingleFace(video, options).withFaceExpressions()
+
+            onPlay(video);
         }
 
         run();
