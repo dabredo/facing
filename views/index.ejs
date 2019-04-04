@@ -3,6 +3,7 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/javascripts/face-api.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -13,15 +14,25 @@
     <script type="text/javascript">
         var video = document.querySelector("#video");
 
-        if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-                video.srcObject = stream;
-            })
-            .catch(function (error) {
-                console.log("Something went wrong!");
-            });
+        // if (navigator.mediaDevices.getUserMedia) {
+        //     navigator.mediaDevices.getUserMedia({ video: true })
+        //     .then(function (stream) {
+        //         video.srcObject = stream;
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //         console.log("Something went wrong!");
+        //     });
+        // }
+
+        async function run() {
+            await faceapi.loadFaceLandmarkModel('/')
+
+            const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
+            video.srcObject = stream
         }
+
+        run();
     </script>
   </body>
 </html>
