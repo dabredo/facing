@@ -9,10 +9,9 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-    <video id="video" width="640" height="480" autoplay></video>
+    <video id="video" onloadedmetadata="onPlay(this)" width="640" height="480" autoplay></video>
 
     <script type="text/javascript">
-        var video = document.querySelector("#video");
 
         // if (navigator.mediaDevices.getUserMedia) {
         //     navigator.mediaDevices.getUserMedia({ video: true })
@@ -24,6 +23,15 @@
         //         console.log("Something went wrong!");
         //     });
         // }
+
+        async function onPlay() {
+            const video = document.querySelector("#video");
+
+            const result = await faceapi.detectSingleFace(video).withFaceExpressions()
+            if (result) {
+                console.log(result)
+            }
+        }
 
         async function run() {
             console.log('run')
@@ -37,13 +45,8 @@
             // console.log('options', options)
 
             // const result = await faceapi.detectSingleFace(video, options).withFaceExpressions()
-            const result = await faceapi.detectSingleFace(video).withFaceExpressions()
-            if (result) {
-                console.log(result)
-            }
         }
 
-            // const options = getFaceDetectorOptions()
         run();
     </script>
   </body>
