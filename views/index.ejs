@@ -25,12 +25,16 @@
         // }
 
         async function onPlay() {
+            console.log('onPlay');
+
             const video = document.querySelector("#video");
 
             const result = await faceapi.detectSingleFace(video).withFaceExpressions()
             if (result) {
                 console.log(result)
             }
+
+            setTimeout(() => onPlay(video), 3000)
         }
 
         async function run() {
